@@ -15,7 +15,7 @@ def get_info():
             value: the real information which will be inserted into the docx.
     """
     lst_csv_data = []
-    with open("shops.csv", "r", encoding="utf-8") as shops_file:
+    with open("shops.csv", "r", encoding="utf-8-sig") as shops_file:
         lst_shops = shops_file.readlines()
         #get the keys
         lst_keys = lst_shops.pop(0).replace("\n", "").split(";")
@@ -67,7 +67,7 @@ def modify_docx(dct_info):
             inline[i].text = text
 
     document.save("tmp.docx")
-
+    print(dct_info.keys())
     #some small escaping done, to prevent the script from crashing
     output_name = dct_info.get("depot", "test").replace('"', "").replace(" ", "_")
     output_path = os.path.join("parsed", '{}.pdf'.format(output_name))
